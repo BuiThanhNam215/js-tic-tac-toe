@@ -8,6 +8,7 @@ import {
   getCellElementAtIdx,
   getGameStatusElement,
   getReplayButtonElement,
+  getCellListElement,
 } from "./selectors.js";
 import { checkGameStatus } from "./utils.js";
 let currentTurn = TURN.CROSS;
@@ -82,10 +83,19 @@ function handleCellClick(cell, index) {
 }
 
 function initCellElementList() {
-  const cellElementList = getCellElementList();
-  cellElementList.forEach((cell, index) => {
-    cell.addEventListener("click", () => handleCellClick(cell, index));
+  const liList = getCellElementList();
+  liList.forEach((cell, index) => {
+    cell.dataset.idx = index;
   });
+  const ulList = getCellListElement();
+
+  if (ulList) {
+    ulList.addEventListener("click", (event) => {
+      if (event.target.tagName !== "LI") return;
+      const index = Number.parseInt(event.target.dataset.idx);
+      handleCellClick(event.target, index);
+    });
+  }
 }
 
 function resetGame() {

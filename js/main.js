@@ -1,6 +1,3 @@
-/**
- * Global variables
- */
 import { CELL_VALUE, GAME_STATUS, TURN } from "./constants.js";
 import {
   getCellElementList,
@@ -11,7 +8,6 @@ import {
 } from "./selectors.js";
 import { checkGameStatus } from "./utils.js";
 let currentTurn = TURN.CROSS;
-let isGameEnded = false;
 let gameStatus = GAME_STATUS.PLAYING;
 let cellValues = new Array(9).fill("");
 
@@ -112,21 +108,6 @@ function initReplayButton() {
     replayButton.addEventListener("click", resetGame);
   }
 }
-/**
- * TODOs
- *
- * 1. Bind click event for all cells
- * 2. On cell click, do the following:
- *    - Toggle current turn
- *    - Mark current turn to the selected cell
- *    - Check game state: win, ended or playing
- *    - If game is win, highlight win cells
- *    - Not allow to re-click the cell having value.
- *
- * 3. If game is win or ended --> show replay button.
- * 4. On replay button click --> reset game to play again.
- *
- */
 
 (() => {
   initCellElementList();
